@@ -13,13 +13,10 @@ class Quest3 {
             graph.put(v, new ArrayList<>());
         }
     }
-
-    // Add Edge
     void addEdge(char u, char v) {
         graph.get(u).add(v);
     }
 
-    // Utility function for Topological Sort
     void topoSortUtil(char v, Set<Character> visited, LinkedList<Character> stack) {
 
         visited.add(v);
@@ -29,12 +26,9 @@ class Quest3 {
                 topoSortUtil(neighbor, visited, stack);
             }
         }
-
         stack.addFirst(v);
     }
-
     List<Character> topologicalSort() {
-
         Set<Character> visited = new HashSet<>();
         LinkedList<Character> stack = new LinkedList<>();
 
@@ -43,21 +37,16 @@ class Quest3 {
                 topoSortUtil(v, visited, stack);
             }
         }
-
         return stack;
     }
-
     public static void main(String[] args) {
-
         List<Character> vertices = Arrays.asList(
                 'm', 'n', 'o', 'p', 'q', 'r',
                 's', 't', 'u', 'v', 'w', 'x',
                 'y', 'z'
         );
-
         Quest3 g = new Quest3(vertices);
 
-        // Add edges
         g.addEdge('m', 'q');
         g.addEdge('m', 'r');
         g.addEdge('m', 'x');
@@ -69,9 +58,11 @@ class Quest3 {
         g.addEdge('o', 'r');
         g.addEdge('o', 's');
         g.addEdge('o', 'v');
-        g.addEdge('o', 'p');
 
-        g.addEdge('p', 'w');
+        g.addEdge('p', 'o');
+        g.addEdge('p', 's');
+        g.addEdge('p', 'z');
+
 
         g.addEdge('q', 't');
 
@@ -83,9 +74,11 @@ class Quest3 {
         g.addEdge('u', 't');
 
         g.addEdge('v', 'w');
+        g.addEdge('v', 'x');
 
-        g.addEdge('x', 'z');
-        g.addEdge('y', 'z');
+        g.addEdge('w', 'z');
+
+        g.addEdge('y', 'v');
 
         List<Character> order = g.topologicalSort();
 

@@ -1,65 +1,48 @@
 public class Quest4 {
 
-    public static String lcs(String X, String Y) {
+    public static void main(String[] args) {
 
-        int m = X.length();
-        int n = Y.length();
+        String s1 = "BHOMIKA";
+        String s2 = "ETAOINSHR";
+
+        int m = s1.length();
+        int n = s2.length();
 
         int[][] dp = new int[m + 1][n + 1];
 
-        for (int i = 0; i <= m; i++) {
-            for (int j = 0; j <= n; j++) {
+        for (int i = 1; i <= m; i++) {
 
-                if (i == 0 || j == 0) {
-                    dp[i][j] = 0;
-                }
+            for (int j = 1; j <= n; j++) {
 
-                else if (X.charAt(i - 1) == Y.charAt(j - 1)) {
+                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 }
-
                 else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
                 }
             }
         }
-
         int i = m;
         int j = n;
 
-        String lcsStr = "";
+        String lcs = "";
 
         while (i > 0 && j > 0) {
-
-            if (X.charAt(i - 1) == Y.charAt(j - 1)) {
-                lcsStr = X.charAt(i - 1) + lcsStr;
+            if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                lcs = s1.charAt(i - 1) + lcs;
                 i--;
                 j--;
             }
-
             else if (dp[i - 1][j] > dp[i][j - 1]) {
                 i--;
             }
-
             else {
                 j--;
             }
         }
-
+        System.out.println("String 1: " + s1);
+        System.out.println("String 2: " + s2);
         System.out.println("LCS Length: " + dp[m][n]);
-
-        return lcsStr;
-    }
-
-    public static void main(String[] args) {
-
-        String name = "BHOMIKA".toUpperCase();
-        String string2 = "ETAOINSHR";
-
-        String result = lcs(name, string2);
-
-        System.out.println("String1: " + name);
-        System.out.println("String2: " + string2);
-        System.out.println("LCS: " + result);
+        System.out.println("LCS: " + lcs);
     }
 }

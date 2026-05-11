@@ -1,51 +1,51 @@
-import java.util.*;
+import java.util.ArrayList;
+
 public class Quest1 {
+    static void matrix(int n) {
 
-    public static void main(String[] args) {
-
-        String[] vertices = {"A", "B", "C", "D"};
-        int n = vertices.length;
-
-        // Adjacency Matrix
-        int[][] adjMatrix = new int[n][n];
-
+        int[][] graph = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (i != j) {
-                    adjMatrix[i][j] = 1;
+                    graph[i][j] = 1;
                 }
             }
         }
-        // Print Matrix
         System.out.println("Adjacency Matrix:");
+
         for (int i = 0; i < n; i++) {
+
             for (int j = 0; j < n; j++) {
-                System.out.print(adjMatrix[i][j] + " ");
+                System.out.print(graph[i][j] + " ");
             }
+
             System.out.println();
         }
+    }
 
-        // Adjacency List
-        HashMap<String, ArrayList<String>> adjList = new HashMap<>();
+    static void list(int n) {
+
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-
-            ArrayList<String> connections = new ArrayList<>();
-
+            graph.add(new ArrayList<>());
+        }
+        for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (i != j) {
-                    connections.add(vertices[j]);
+                    graph.get(i).add(j);
                 }
             }
-
-            adjList.put(vertices[i], connections);
         }
-
-        // Print List
         System.out.println("\nAdjacency List:");
 
-        for (String key : adjList.keySet()) {
-            System.out.println(key + ": " + adjList.get(key));
+        for (int i = 0; i < n; i++) {
+            System.out.println(i + " -> " + graph.get(i));
         }
+    }
+    public static void main(String[] args) {
+        int vertices = 4;
+        matrix(vertices);
+        list(vertices);
     }
 }
